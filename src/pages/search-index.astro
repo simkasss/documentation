@@ -11,32 +11,15 @@ const postsMdx = [...(await Astro.glob("../content/**/*.mdx")).filter((post) => 
 const postsMdxWithContent = postsMdx.map((post) => {
   const url = new URL(post.file, import.meta.url)
   var content = fs.readFileSync(url, "utf-8")
-
-  if (content.length > 78000) {
-    console.warn("\x1b[1;43mRecord exceeds 78000 chars and was splitted into chunks - " + url + "\x1b[0m")
-    const splittedContent = splitPageIntoChunks(content, 78000)
-    const chunks = splittedContent.map((chunk) => {
-      return { ...post, rawContent: () => chunk }
-    })
-    return chunks
-  }
-  return { ...post, rawContent: () => content }
+  // splitting content into paragraphs by parahraph titles (##)
+  const splittedContent = content.split("##")
+  const chunks = splittedContent.map((chunk) => {
+    return { ...post, rawContent: () => chunk }
+  })
+  return chunks
 })
 
-// Helper function for splitting content by the chunkSize:
-function splitPageIntoChunks(pageContent, chunkSize) {
-  const chunks = []
-  let currentIndex = 0
-  while (currentIndex < pageContent.length) {
-    const chunk = pageContent.substr(currentIndex, chunkSize)
-    chunks.push(chunk)
-    currentIndex += chunkSize
-  }
-  return chunks
-}
-
 const markDownFiles = [...postsMdxWithContent].flat()
-
 //const allContent = [...pages, ...postsMdx]
 
 const transformMarkdownInstancesToIndexes = async (instances: MarkdownInstance<Record<string, any>>[]) => {
