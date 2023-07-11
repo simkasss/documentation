@@ -20,7 +20,6 @@ This is the content of section 2.`
       "## Section 2\nThis is the content of section 2.",
     ]
     const receivedOutput = splitTextByHeadings(sampleText)
-    console.log("receivedOutput", receivedOutput)
     expect(receivedOutput).toEqual(expectedOutput)
   })
 })

@@ -13,6 +13,5 @@ export function splitTextByHeadings(text) {
     const sectionContent = text.substring(lastIndex).trim()
     sections.push(sectionContent)
   }
-  console.log("sections", sections)
   return sections
 }
