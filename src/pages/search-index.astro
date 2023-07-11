@@ -11,13 +11,31 @@ const postsMdx = [...(await Astro.glob("../content/**/*.mdx")).filter((post) => 
 const postsMdxWithContent = postsMdx.map((post) => {
   const url = new URL(post.file, import.meta.url)
   var content = fs.readFileSync(url, "utf-8")
-  // splitting content into paragraphs by parahraph titles (##)
-  const splittedContent = content.split("##")
+  const splittedContent = splitTextByHeadings(content)
   const chunks = splittedContent.map((chunk) => {
     return { ...post, rawContent: () => chunk }
   })
   return chunks
 })
+
+function splitTextByHeadings(text) {
+  const headingRegex = /^(#{1,4})\s+(.*)$/gm
+  const sections = []
+  let match
+  let lastIndex = 0
+  while ((match = headingRegex.exec(text))) {
+    const sectionContent = text.substring(lastIndex, match.index).trim()
+    const sectionText = sectionContent
+    sections.push(sectionText)
+    lastIndex = match.index
+  }
+  // Add the last section (if any) after the last heading
+  if (lastIndex < text.length) {
+    const sectionContent = text.substring(lastIndex).trim()
+    sections.push(sectionContent)
+  }
+  return sections
+}
 
 const markDownFiles = [...postsMdxWithContent].flat()
 //const allContent = [...pages, ...postsMdx]
