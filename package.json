@@ -20,7 +20,8 @@
     "lint-ts": "eslint --ext ts .",
     "lint-ts:fix": "eslint --ext ts .",
     "lint-solc": "solhint 'public/samples/**/*.sol'",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "jest"
   },
   "dependencies": {
     "@11ty/eleventy-fetch": "^4.0.0",
@@ -66,6 +67,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "hardhat": "^2.14.0",
     "husky": "^8.0.3",
+    "jest": "^29.6.1",
     "lint-staged": "^13.2.2",
     "lodash": "^4.17.21",
     "prettier": "^2.8.8",
@@ -76,6 +78,7 @@
     "remark-directive": "^2.0.1",
     "solhint": "^3.4.1",
     "solhint-plugin-prettier": "^0.0.5",
+    "ts-jest": "^29.1.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.4"
   },
