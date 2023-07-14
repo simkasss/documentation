@@ -1,0 +1,192 @@
+---
+layout: ../../../../layouts/MainLayout.astro
+section: nodeOperator
+date: Last Modified
+title: "Solana"
+---
+
+[//]: # "Documentation generated from docs/*.toml - DO NOT EDIT."
+
+This document describes the Solana settings of Node Config (TOML).
+
+```toml
+[[Solana]]
+ChainID = 'mainnet' # Example
+Enabled = false # Default
+BalancePollPeriod = '5s' # Default
+ConfirmPollPeriod = '500ms' # Default
+OCR2CachePollPeriod = '1s' # Default
+OCR2CacheTTL = '1m' # Default
+TxTimeout = '1m' # Default
+TxRetryTimeout = '10s' # Default
+TxConfirmTimeout = '30s' # Default
+SkipPreflight = true # Default
+Commitment = 'confirmed' # Default
+MaxRetries = 0 # Default
+FeeEstimatorMode = 'fixed' # Default
+ComputeUnitPriceMax = 1000 # Default
+ComputeUnitPriceMin = 0 # Default
+ComputeUnitPriceDefault = 0 # Default
+FeeBumpPeriod = '3s' # Default
+```
+
+### ChainID
+
+```toml
+ChainID = 'mainnet' # Example
+```
+
+ChainID is the Solana chain ID. Must be one of: mainnet, testnet, devnet, localnet. Mandatory.
+
+### Enabled
+
+```toml
+Enabled = false # Default
+```
+
+Enabled enables this chain.
+
+### BalancePollPeriod
+
+```toml
+BalancePollPeriod = '5s' # Default
+```
+
+BalancePollPeriod is the rate to poll for SOL balance and update Prometheus metrics.
+
+### ConfirmPollPeriod
+
+```toml
+ConfirmPollPeriod = '500ms' # Default
+```
+
+ConfirmPollPeriod is the rate to poll for signature confirmation.
+
+### OCR2CachePollPeriod
+
+```toml
+OCR2CachePollPeriod = '1s' # Default
+```
+
+OCR2CachePollPeriod is the rate to poll for the OCR2 state cache.
+
+### OCR2CacheTTL
+
+```toml
+OCR2CacheTTL = '1m' # Default
+```
+
+OCR2CacheTTL is the stale OCR2 cache deadline.
+
+### TxTimeout
+
+```toml
+TxTimeout = '1m' # Default
+```
+
+TxTimeout is the timeout for sending txes to an RPC endpoint.
+
+### TxRetryTimeout
+
+```toml
+TxRetryTimeout = '10s' # Default
+```
+
+TxRetryTimeout is the duration for tx manager to attempt rebroadcasting to RPC, before giving up.
+
+### TxConfirmTimeout
+
+```toml
+TxConfirmTimeout = '30s' # Default
+```
+
+TxConfirmTimeout is the duration to wait when confirming a tx signature, before discarding as unconfirmed.
+
+### SkipPreflight
+
+```toml
+SkipPreflight = true # Default
+```
+
+SkipPreflight enables or disables preflight checks when sending txs.
+
+### Commitment
+
+```toml
+Commitment = 'confirmed' # Default
+```
+
+Commitment is the confirmation level for solana state and transactions. ([documentation](https://docs.solana.com/developing/clients/jsonrpc-api#configuring-state-commitment))
+
+### MaxRetries
+
+```toml
+MaxRetries = 0 # Default
+```
+
+MaxRetries is the maximum number of times the RPC node will automatically rebroadcast a tx.
+The default is 0 for custom txm rebroadcasting method, set to -1 to use the RPC node's default retry strategy.
+
+### FeeEstimatorMode
+
+```toml
+FeeEstimatorMode = 'fixed' # Default
+```
+
+FeeEstimatorMode is the method used to determine the base fee
+
+### ComputeUnitPriceMax
+
+```toml
+ComputeUnitPriceMax = 1000 # Default
+```
+
+ComputeUnitPriceMax is the maximum price per compute unit that a transaction can be bumped to
+
+### ComputeUnitPriceMin
+
+```toml
+ComputeUnitPriceMin = 0 # Default
+```
+
+ComputeUnitPriceMin is the minimum price per compute unit that transaction can have
+
+### ComputeUnitPriceDefault
+
+```toml
+ComputeUnitPriceDefault = 0 # Default
+```
+
+ComputeUnitPriceDefault is the default price per compute unit price, and the starting base fee when FeeEstimatorMode = 'fixed'
+
+### FeeBumpPeriod
+
+```toml
+FeeBumpPeriod = '3s' # Default
+```
+
+FeeBumpPeriod is the amount of time before a tx is retried with a fee bump
+
+## Solana.Nodes
+
+```toml
+[[Solana.Nodes]]
+Name = 'primary' # Example
+URL = 'http://solana.web' # Example
+```
+
+### Name
+
+```toml
+Name = 'primary' # Example
+```
+
+Name is a unique (per-chain) identifier for this node.
+
+### URL
+
+```toml
+URL = 'http://solana.web' # Example
+```
+
+URL is the HTTP(S) endpoint for this node.
