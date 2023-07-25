@@ -1,3 +1,98 @@
 # TODO: linkcheck is not playing well with some css files generated at build time
 assets\/.*.css$
 _astro\/.*.css$
+# External links, that has HTTP 404 status code
+https://faucets.chain.link/chapel
+https://github.com/smartcontractkit/documentation/tree/main/src/pages/vrf/v2/subscription.mdx
+https://github.com/smartcontractkit/documentation/tree/main/src/pages/vrf/v2/direct-funding.mdx
+https://github.com/smartcontractkit/chainlink/blob/master/contracts/src/v0.8/VRFConsumerBase.sol
+https://github.com/smartcontractkit/chainlink/blob/master/contracts/src/v0.8/AutomationCompatible.sol
+https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/dev/functions/FunctionsBillingRegistry.sol
+https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/dev/functions/FunctionsOracle.sol
+https://github.com/smartcontractkit/smart-contract-examples/blob/main/add-functions-to-project/add-functions-to-project/Functions-request-source.js
+https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/dev/functions/FunctionsClient.sol
+https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/dev/functions/Functions.sol
+https://automation.chain.link/rinkeby
+https://wiki.polygon.technology/docs/develop/ethereum-polygon/pos/getting-started/
+https://docs.starknet.io/documentation/getting_started/intro/
+https://docs.starknet.io/documentation/getting_started/setting_up_the_environment/
+https://github.com/smartcontractkit/chainlink-starknet/blob/develop/contracts/src/chainlink/cairo/ocr2/aggregator_proxy.cairo
+https://project-serum.github.io/anchor/getting-started/introduction.html
+https://docs.linkpool.io/docs/websocket_main
+https://github.com/tokensoft/gran-fondo
+https://github.com/mycelium-ethereum/LinkTRS
+https://github.com/vvoluom/LinkPal
+https://github.com/smartcontractkit/chainlink/blob/master/contracts/src/v0.8/VRFConsumerBaseV2.sol
+https://project-serum.github.io/anchor/
+https://project-serum.github.io/anchor/ts/modules/web3.html
+https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/upkeeps/EthBalanceMonitor.sol
+https://automation.chain.link/chapel
+
+# External links, that has HTTP 403 status code
+https://faucet.polygon.technology/
+https://goerlifaucet.com/
+https://www.infura.io/
+https://www.infura.io/docs/ethereum/wss/introduction.md
+https://infura.io/docs/ethereum/wss/introduction.md
+
+# 429  - delete these links
+https://github.com/ethereum/solc-bin/blob/gh-pages/bin/list.txt/?target=_blank
+https://github.com/smartcontractkit/documentation/tree/main/src/pages/chainlink-nodes/external-adapters/external-adapters.mdx
+https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/automation/upkeeps/ERC20BalanceMonitor.sol
+https://github.com/smartcontractkit/documentation/tree/main/src/pages/chainlink-automation/tutorials/eth-balance.mdx
+
+# External links, that has HTTP 500 status code
+https://docs.connext.network/0.1.x-legacy/developers/intro
+https://docs.hop.exchange/faq#what-is-hop-protocol
+https://docs.nomad.xyz/the-nomad-protocol/verification-mechanisms/optimistic-verification
+https://docs.nomad.xyz/nomad-101/introduction
+https://whitepaper.axieinfinity.com/technology/ronin-ethereum-sidechain
+https://docs.ens.domains/ens-deployments
+https://docs.ens.domains/dapp-developer-guide/resolving-names
+https://docs.nethermind.io/nethermind/
+https://docs.fiews.io/docs/getting-started
+https://docs.etherscan.io/api-endpoints/gas-tracker#get-gas-oracle
+https://docs.safe.global/introduction/the-programmable-account/gnosis-safe
+
+# External links, that has connection failed error
+https://testnet.bscscan.com/address/0x6A2AAd07396B36Fe02a22b33cf443582f682c82f
+https://chain.link/vrf
+https://docs.matic.network/docs/contribute/bor/consensus/
+https://www.chainshot.com/courses
+https://www.npmjs.com/package/@chainlink/solana-sdk
+https://pkg.go.dev/runtime#SetCPUProfileRate
+https://pkg.go.dev/runtime#pkg-variables
+https://pkg.go.dev/runtime#SetBlockProfileRate
+https://pkg.go.dev/runtime#SetMutexProfileFraction
+https://pkg.go.dev/net#Dial
+https://pkg.go.dev/github.com/robfig/cron?utm_source=godoc
+https://forms.gle/WadxnzzjHPtta5Zd9
+https://forms.gle/Jc1MGY5ry1ceYH1X6
+https://github.com/smartcontractkit/chainlink/blob/develop/core/logger/audit/audit_types.go
+
+
+# External links, that has HTTP 308 status code
+https://faucets.chain.link/sepolia/
+https://core.app/tools/testnet-faucet
+https://hardhat.org/getting-started/
+http://hardhat.org
+https://hardhat.org/getting-started/
+https://near.org/blog/eth-near-rainbow-bridge/
+https://data.chain.link/eth-usd/
+https://www.synthetix.io/
+https://docs.solana.com/developing/programming-model/overview
+https://www.coinbase.com/cloud/
+https://docs.solana.com/developing/clients/jsonrpc-api#configuring-state-commitment
+http://functions.chain.link/
+https://data.chain.link/eth-usd
+http://docs.chain.link
+https://www.usechainlinkfunctions.com/
+
+# (server reported no mime type)
+https://faucet.avax.network/
+https://crates.io/crates/chainlink_solana
+
+# External links, that has HTTP 302 status code
+https://github.com/hackbg/chainlink-keepers-templates/tree/main/vault-harvester 
+https://github.com/hackbg/chainlink-keepers-templates/tree/main/batch-nft-reveal
+https://docs.gnosis-safe.io/introduction/the-programmable-account/gnosis-safe

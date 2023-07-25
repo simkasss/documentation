@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "format": "prettier --write .",
-    "linkcheck": "npx ts-node -r tsconfig-paths/register src/scripts/link-check/linkcheck.ts",
+    "linkcheck": "npx ts-node -r tsconfig-paths/register src/scripts/link-check/linkcheck.ts -e",
     "compare-chains-metadata": "tsc scripts/chains-metadata.ts --resolveJsonModule && node scripts/chains-metadata.js ",
     "update-algolia-index": "tsc scripts/update-algolia-index.ts --resolveJsonModule && node scripts/update-algolia-index.js ",
     "sync-chainlink-automation-config": "npx ts-node -r tsconfig-paths/register src/scripts/chainlink-automation/networks-config.ts",
