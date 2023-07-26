@@ -1,1 +1,3 @@
-export const vrfNetworkConfig = ""
+import rawConfig from "./vrf-network-config.json"
+
+export const vrfNetworkConfig = rawConfig
