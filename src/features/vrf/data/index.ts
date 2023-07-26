@@ -1,6 +1,3 @@
-import { ChainlinkAutomationAddresses, ChainlinkAutomationConfigs } from "../types"
-import rawConfig from "./chainlink-automation-config.json"
-import rawAddresses from "./chainlink-automation-addresses.json"
+import rawConfig from "./vrf-network-config.json"
 
-export const chainlinkAutomationConfig = rawConfig as ChainlinkAutomationConfigs
-export const automationAddresses = rawAddresses as ChainlinkAutomationAddresses
+export const vrfNetworkConfig = rawConfig

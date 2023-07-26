@@ -13,6 +13,7 @@ src/config/data/chains.json
 src/config/data/chain-to-technology.json
 src/features/chainlink-automation/data/chainlink-automation-addresses.json
 src/features/chainlink-automation/data/chainlink-automation-config.json
+src/features/vrf/data/vrf-network-config.json
 scripts/reference/linkNameSymbol.json
 scripts/reference/chains.json
 scripts/**/*.js
