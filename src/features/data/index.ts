@@ -22,3 +22,4 @@ export const registryAddresses = {
     },
   },
 }
+export * from "../data"
