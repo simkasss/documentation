@@ -9,7 +9,7 @@ export type Props = {
   dataFeedType?: DataFeedType
 }
 import { getServerSideChainMetadata } from "../../data/api/backend"
-import { CHAINS, ALL_CHAINS } from "../../data/chains"
+import { CHAINS, ALL_CHAINS } from "~/features/data/chains"
 
 const { initialNetwork, ecosystem, dataFeedType } = Astro.props
 
