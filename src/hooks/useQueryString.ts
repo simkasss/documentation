@@ -1,24 +1,23 @@
 import { useState, useCallback, useEffect } from "preact/hooks"
-import qs from "query-string"
 
 const setQueryStringWithoutPageReload = (qsValue) => {
-  if (!window) return
+  if (typeof window === "undefined") return
 
   const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + qsValue
 
   window.history.replaceState({ path: newurl }, "", newurl)
 }
-const setQueryStringValue = (searchParamKey, value, queryString = window.location.search) => {
-  if (!window) return
+const setQueryStringValue = (searchParamKey, value) => {
+  if (typeof window === "undefined") return
 
-  const values = qs.parse(queryString)
-  const newQsValue = qs.stringify({ ...values, [searchParamKey]: value })
-  setQueryStringWithoutPageReload(`?${newQsValue}`)
+  const currentSearchParams = new URLSearchParams(window.location.search)
+  currentSearchParams.set(searchParamKey, value)
+
+  setQueryStringWithoutPageReload(`?${currentSearchParams.toString()}`)
 }
 const getQueryStringValue = (searchParamKey) => {
   if (typeof window === "undefined") return
-  const values = qs.parse(window.location.search)
-  return values[searchParamKey]
+  return new URLSearchParams(window.location.search).get(searchParamKey)
 }
 
 type SearchParamValue = string | string[]
@@ -38,7 +37,7 @@ function useQueryString(
 
   useEffect(() => {
     const body = document.querySelector("body")
-    const observer = new MutationObserver((mutations) => {
+    const observer = new MutationObserver(() => {
       const newQueryStringValue = getQueryStringValue(searchParamKey)
       if (newQueryStringValue !== value) {
         setValue(newQueryStringValue)
