@@ -160,7 +160,8 @@ export const CostTable = ({ method }: Props) => {
   const [chain, setChain] = useState<ChainNetwork | null>(null)
   const [network] = useQueryString("network", "")
   const options = CHAINS.filter((chain) => chain.supportedFeatures.includes(method))
-  let mainChainName, networkName
+  const [mainChainName, setMainChainName] = useState<string>("")
+  const [networkName, setNetworkName] = useState<string>("")
 
   const getDataResponse = async (mainChainName: string, networkName: string): Promise<dataResponse> => {
     const cacheKey = `${mainChainName}-${networkName === mainChainName ? chain.networkType : networkName}-${
@@ -182,8 +183,8 @@ export const CostTable = ({ method }: Props) => {
 
   useEffect(() => {
     if (typeof network === "string" && network !== "") {
-      mainChainName = network.split("-")[0]
-      networkName = network.split("-")[1]
+      setMainChainName(network.split("-")[0])
+      setNetworkName(network.split("-")[1])
       const newMainChain = options.filter((chain) => chain.label.toLowerCase().includes(mainChainName))[0]
       setMainChain(newMainChain)
       const newChain = newMainChain.networks.filter((chain) => chain.queryString === network)[0]
@@ -317,28 +318,28 @@ export const CostTable = ({ method }: Props) => {
   }
 
   const getsupportedNetworkShortcut = () => {
-    const mainChainName = mainChain.label.toLowerCase()
+    const chainName = mainChain.label.toLowerCase()
     const subChainName = networkName
-    switch (mainChainName) {
+    switch (chainName) {
       case "ethereum":
         if (subChainName !== "mainnet") {
           return `${subChainName}-${chain.networkType}`
         }
-        return `${mainChainName}-${chain.networkType}`
+        return `${chainName}-${chain.networkType}`
       case "bnb chain":
-        return `${mainChainName.replace(" ", "-")}${chain.networkType === "testnet" ? "-" + chain.networkType : ""}`
+        return `${chainName.replace(" ", "-")}${chain.networkType === "testnet" ? "-" + chain.networkType : ""}`
       case "polygon (matic)":
         return `polygon-matic-${
           chain.networkType === "testnet" ? subChainName + "-" + chain.networkType : chain.networkType
         }`
       case "avalanche":
-        return `${mainChainName}-${
+        return `${chainName}-${
           chain.networkType === "testnet" ? subChainName + "-" + chain.networkType : chain.networkType
         }`
       case "fantom":
-        return `${mainChainName}-${chain.networkType}`
+        return `${chainName}-${chain.networkType}`
       case "arbitrum":
-        return `${mainChainName}-${
+        return `${chainName}-${
           chain.networkType === "testnet" ? subChainName + "-" + chain.networkType : chain.networkType
         }`
       default:
