@@ -1,13 +1,11 @@
-import { Chain, ChainNetwork } from "~/features/data/chains"
-
+import { CHAINS, Chain, ChainNetwork, getNetworkFromQueryString } from "~/features/data/chains"
 import "./costTable.css"
-import { useEffect, useReducer } from "preact/hooks"
+import { useEffect, useReducer, useState } from "preact/hooks"
 import { BigNumber, utils } from "ethers"
 import button from "@chainlink/design-system/button.module.css"
+import useQueryString from "~/hooks/useQueryString"
 
 interface Props {
-  mainChain: Chain
-  chain: ChainNetwork
   method: "vrfSubscription" | "vrfDirectFunding"
 }
 
@@ -156,9 +154,14 @@ export const getGasCalculatorUrl = ({
   }&method=${method === "vrfSubscription" ? "subscription" : "directFunding"}`
 }
 
-export const CostTable = ({ mainChain, chain, method }: Props) => {
+export const CostTable = ({ method }: Props) => {
   const [state, dispatch] = useReducer(reducer, initialState)
-  let mainChainName, networkName
+  const [mainChain, setMainChain] = useState<Chain | null>(null)
+  const [chain, setChain] = useState<ChainNetwork | null>(null)
+  const [network] = useQueryString("network", "")
+  const options = CHAINS.filter((chain) => chain.supportedFeatures.includes(method))
+  const [mainChainName, setMainChainName] = useState<string>("")
+  const [networkName, setNetworkName] = useState<string>("")
 
   const getDataResponse = async (mainChainName: string, networkName: string): Promise<dataResponse> => {
     const cacheKey = `${mainChainName}-${networkName === mainChainName ? chain.networkType : networkName}-${
@@ -179,42 +182,17 @@ export const CostTable = ({ mainChain, chain, method }: Props) => {
   }
 
   useEffect(() => {
-    switch (mainChain.label) {
-      case "BNB Chain":
-        mainChainName = mainChain.label.replace("Chain", "").replace(" ", "").toLowerCase()
-        break
-      case "Polygon (Matic)":
-        mainChainName = mainChain.label.replace(" (Matic)", "").toLowerCase()
-        break
-      default:
-        mainChainName = mainChain.label.toLowerCase()
+    if (typeof network === "string" && network !== "") {
+      setMainChainName(network.split("-")[0])
+      setNetworkName(network.split("-")[1])
+      const { chain, chainNetwork } = getNetworkFromQueryString(network)
+      setMainChain(chain)
+      setChain(chainNetwork)
     }
-    if (chain.name.includes("Mainnet")) {
-      networkName = "mainnet"
+    if (!mainChain || !chain) {
+      return
     }
-    switch (chain.name) {
-      case "Sepolia Testnet":
-        networkName = "sepolia"
-        break
-      case "Goerli Testnet":
-        networkName = "goerli"
-        break
-      case "BNB Chain Testnet":
-        networkName = "testnet"
-        break
-      case "Mumbai Testnet":
-        networkName = "mumbai"
-        break
-      case "Avalanche Testnet":
-        networkName = "fuji"
-        break
-      case "Fantom Testnet":
-        networkName = "testnet"
-        break
-      case "Arbitrum Goerli":
-        networkName = "goerli"
-        break
-    }
+
     dispatch({ type: "SET_LOADING", payload: true })
     const fillInputs = async () => {
       const responseJson: dataResponse = await getDataResponse(mainChainName, networkName)
@@ -264,7 +242,7 @@ export const CostTable = ({ mainChain, chain, method }: Props) => {
     })
 
     return () => dispatch({ type: "SET_LOADING", payload: false })
-  }, [method, mainChain, chain])
+  }, [method, network, mainChain, chain])
 
   const handleRadioChange = (event) => {
     dispatch({ type: "SET_CURRENT_GAS_LANE", payload: parseInt(event.target.value) })
@@ -339,28 +317,28 @@ export const CostTable = ({ mainChain, chain, method }: Props) => {
   }
 
   const getsupportedNetworkShortcut = () => {
-    const mainChainName = mainChain.label.toLowerCase()
+    const chainName = mainChain.label.toLowerCase()
     const subChainName = networkName
-    switch (mainChainName) {
+    switch (chainName) {
       case "ethereum":
         if (subChainName !== "mainnet") {
           return `${subChainName}-${chain.networkType}`
         }
-        return `${mainChainName}-${chain.networkType}`
+        return `${chainName}-${chain.networkType}`
       case "bnb chain":
-        return `${mainChainName.replace(" ", "-")}${chain.networkType === "testnet" ? "-" + chain.networkType : ""}`
+        return `${chainName.replace(" ", "-")}${chain.networkType === "testnet" ? "-" + chain.networkType : ""}`
       case "polygon (matic)":
         return `polygon-matic-${
           chain.networkType === "testnet" ? subChainName + "-" + chain.networkType : chain.networkType
         }`
       case "avalanche":
-        return `${mainChainName}-${
+        return `${chainName}-${
           chain.networkType === "testnet" ? subChainName + "-" + chain.networkType : chain.networkType
         }`
       case "fantom":
-        return `${mainChainName}-${chain.networkType}`
+        return `${chainName}-${chain.networkType}`
       case "arbitrum":
-        return `${mainChainName}-${
+        return `${chainName}-${
           chain.networkType === "testnet" ? subChainName + "-" + chain.networkType : chain.networkType
         }`
       default:
@@ -519,7 +497,9 @@ export const CostTable = ({ mainChain, chain, method }: Props) => {
     }
     return res
   }
-
+  if (!mainChain || !chain) {
+    return
+  }
   if (state.isLoading) {
     return <p className="loading-text">Data is being fetched. Please wait a moment...</p>
   } else {
