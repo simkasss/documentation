@@ -21,10 +21,10 @@ export interface Chain {
   supportedFeatures: ("vrfSubscription" | "vrfDirectFunding" | "feeds")[]
 }
 
-export const getNetworkFromQueryString = (queryString): { chain: Chain; network: ChainNetwork } => {
-  const chain = CHAINS.filter((chain) => chain.page.includes(queryString.split("-")[0]))[0]
-  const network = chain.networks.filter((network) => network.queryString === queryString)[0]
-  return { chain, network }
+export const getNetworkFromQueryString = (queryString): { chain: Chain; chainNetwork: ChainNetwork } => {
+  const chain = CHAINS.find((chain) => chain.networks.some((network) => network.queryString === queryString))
+  const chainNetwork = chain.networks.filter((network) => network.queryString === queryString)[0]
+  return { chain, chainNetwork }
 }
 
 export const CHAINS: Chain[] = [

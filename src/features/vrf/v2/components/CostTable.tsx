@@ -1,4 +1,4 @@
-import { CHAINS, Chain, ChainNetwork } from "~/features/data/chains"
+import { CHAINS, Chain, ChainNetwork, getNetworkFromQueryString } from "~/features/data/chains"
 import "./costTable.css"
 import { useEffect, useReducer, useState } from "preact/hooks"
 import { BigNumber, utils } from "ethers"
@@ -185,10 +185,9 @@ export const CostTable = ({ method }: Props) => {
     if (typeof network === "string" && network !== "") {
       setMainChainName(network.split("-")[0])
       setNetworkName(network.split("-")[1])
-      const newMainChain = options.filter((chain) => chain.label.toLowerCase().includes(mainChainName))[0]
-      setMainChain(newMainChain)
-      const newChain = newMainChain.networks.filter((chain) => chain.queryString === network)[0]
-      setChain(newChain)
+      const { chain, chainNetwork } = getNetworkFromQueryString(network)
+      setMainChain(chain)
+      setChain(chainNetwork)
     }
     if (!mainChain || !chain) {
       return

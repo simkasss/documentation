@@ -1,6 +1,7 @@
 import "./dropdown.css"
 import { CostTable } from "./CostTable"
 import { Dropdown } from "./Dropdown"
+import { CHAINS } from "~/features/data/chains"
 
 interface Props {
   placeholder?: string
@@ -8,9 +9,10 @@ interface Props {
 }
 
 export const DropDownMenu = ({ placeholder = "Select a network...", method }: Props) => {
+  const options = CHAINS.filter((chain) => chain.supportedFeatures.includes(method))
   return (
     <div className="main-container">
-      <Dropdown placeholder={placeholder} method={method} />
+      <Dropdown placeholder={placeholder} options={options} />
       <CostTable method={method} />
     </div>
   )

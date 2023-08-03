@@ -6,16 +6,15 @@ import useQueryString from "~/hooks/useQueryString"
 
 interface Props {
   placeholder?: string
-  method: "vrfSubscription" | "vrfDirectFunding"
+  options: Chain[]
 }
 
-export const Dropdown = ({ placeholder = "Select a network...", method }: Props) => {
+export const Dropdown = ({ placeholder = "Select a network...", options }: Props) => {
   const [network, setNetwork] = useQueryString("network", "")
   const [searchValue, setSearchValue] = useState<string>("")
   const [showMenu, setShowMenu] = useState<boolean>(false)
   const [showSubMenu, setShowSubMenu] = useState<number>(-1)
   const wrapperRef = useRef(null)
-  const options = CHAINS.filter((chain) => chain.supportedFeatures.includes(method))
 
   const useOutsideAlerter = (ref: RefObject<HTMLDivElement>) => {
     useEffect(() => {
