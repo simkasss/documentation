@@ -41,6 +41,9 @@ export const FeedList = ({
   function handleNetworkSelect(chain: Chain) {
     setSelectedChain(chain.page)
   }
+  useEffect(() => {
+    setSelectedChain("ethereum")
+  }, [])
 
   const handleCategorySelection = (category) => {
     paginate(1)
