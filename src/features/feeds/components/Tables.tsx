@@ -2,7 +2,7 @@
 import h from "preact"
 import feedList from "./FeedList.module.css"
 import { clsx } from "../../../lib"
-import { ChainNetwork } from "../data/chains"
+import { ChainNetwork } from "~/features/data/chains"
 import tableStyles from "./Tables.module.css"
 import button from "@chainlink/design-system/button.module.css"
 
