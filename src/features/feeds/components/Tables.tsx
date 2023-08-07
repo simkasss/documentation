@@ -340,8 +340,10 @@ export const MainnetTable = ({
       return !chain.docs.nftFloorUnits && !chain.docs.porType
     })
     .filter((chain) => selectedFeedCategories.length === 0 || selectedFeedCategories.includes(chain.feedCategory))
-    .filter((pair) =>
-      pair.name.toLowerCase().replaceAll(" ", "").includes(searchValue.toLowerCase().replaceAll(" ", ""))
+    .filter(
+      (pair) =>
+        !searchValue ||
+        pair.name.toLowerCase().replaceAll(" ", "").includes(searchValue.toLowerCase().replaceAll(" ", ""))
     )
   const slicedFilteredMetadata = filteredMetadata.slice(firstAddr, lastAddr)
   return (

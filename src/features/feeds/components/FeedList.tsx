@@ -41,15 +41,17 @@ export const FeedList = ({
   function handleNetworkSelect(chain: Chain) {
     setSelectedChain(chain.page)
   }
-  useEffect(() => {
-    setSelectedChain("ethereum")
-  }, [])
 
-  const handleCategorySelection = (category) => {
+  const handleCategorySelection = (category: string) => {
     paginate(1)
-    if (selectedFeedCategories.includes(category)) {
+    if (typeof selectedFeedCategories === "string" && selectedFeedCategories !== category) {
+      setSelectedFeedCategories([selectedFeedCategories, category])
+    } else if (typeof selectedFeedCategories === "string" && selectedFeedCategories === category) {
+      setSelectedFeedCategories([])
+    }
+    if (Array.isArray(selectedFeedCategories) && selectedFeedCategories.includes(category)) {
       setSelectedFeedCategories(selectedFeedCategories.filter((item) => item !== category))
-    } else {
+    } else if (Array.isArray(selectedFeedCategories)) {
       setSelectedFeedCategories([...selectedFeedCategories, category])
     }
   }
