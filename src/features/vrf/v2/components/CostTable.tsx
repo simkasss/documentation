@@ -240,7 +240,7 @@ export const CostTable = ({ method }: Props) => {
       dispatch({ type: "SET_LOADING", payload: false })
       console.error(error)
     })
-
+    setSupportedNetworkShortcut(getsupportedNetworkShortcut(networkName))
     return () => dispatch({ type: "SET_LOADING", payload: false })
   }, [method, network, mainChain, chain])
 
